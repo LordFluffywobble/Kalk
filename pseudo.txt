@@ -1,0 +1,1 @@
+add: Parse as string before matching addition sign and input numbers. Then parse as int and put "output = a + b;". 
