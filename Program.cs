@@ -1,5 +1,8 @@
 ﻿namespace Kalk;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Runtime.Serialization;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
 class Program
@@ -9,29 +12,71 @@ class Program
     static void Main(string[] args)
     {
 
-        addArray();
+        mathPicker();
 
     }
     
-    public static void addArray()
+    // public static void addArray()
+    // {
+    //     Console.Write("Enter the list of numbers you wish to add together: ");
+    //     double []inputArray = Console.ReadLine()
+    //                         .Split(' ')
+    //                         .Select(double.Parse)
+    //                         .ToArray();
+        
+    //     double total = 0;
+    //     for (int i = 0; i < inputArray.Length; i++)
+    //     {
+    //         total += inputArray[i];
+    //     } 
+    //     Console.WriteLine($" The sum of the numbers is: {total}");
+    // }
+  
+    // public static void minusArray()
+    // {
+        
+    // }
+  
+    // public static void timesArray()
+    // {
+        
+    // }
+  
+    // public static void divideArray()
+    // {
+        
+    // }
+
+    public static void mathPicker()
     {
-        Console.Write("Enter the list of numbers you wish to add together: ");
+        Console.WriteLine("Which operation do you wish to do? Pick between +, *, -, / ");
+        String op = Console.ReadLine() ?? "";
+        Console.Write("Enter the list of numbers: ");
+
         double []inputArray = Console.ReadLine()
                             .Split(' ')
                             .Select(double.Parse)
                             .ToArray();
-        
-        double total = 0;
-        for (int i = 0; i < inputArray.Length; i++)
+
+        if (inputArray.Length == 0) return;
+        //double total = (op == "*" || op == "/") ? 1 : 0;
+        double total = inputArray[0];
+
+        for (int i = 1; i < inputArray.Length; i++)
         {
-            total += inputArray[i];
-        } 
-        Console.WriteLine($" The sum of the numbers is: {total}");
+            total = op switch
+            {
+                "+" => total + inputArray[i],
+                "-" => total - inputArray[i],
+                "*" => total * inputArray[i],
+                "/" => total / inputArray[i],
+                _   => total
+            };
+        }     
+        Console.WriteLine($"The result is: {total}");               
     }
-  
-  
-  
-  
+
+
     // static (int, int, string) userInput()
     // {
     //     Console.Write("Enter the first number: ");
