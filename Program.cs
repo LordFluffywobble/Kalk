@@ -66,6 +66,7 @@ class Program
         {
             total = op switch
             {
+                "/" when inputArray[i] == 0 => total,
                 "+" => total + inputArray[i],
                 "-" => total - inputArray[i],
                 "*" => total * inputArray[i],
