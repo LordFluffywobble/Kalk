@@ -1,2 +1,4 @@
 Prompt the user for a list of numbers to add.
 add the list.
+ask for the operation the user wish to perform.
+use a switch statement to chose the actions based on the operation chosen.
