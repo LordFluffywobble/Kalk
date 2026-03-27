@@ -1,4 +1,5 @@
 ﻿namespace Kalk;
+
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Runtime.Serialization;
@@ -7,15 +8,15 @@ using System.Security.Cryptography.X509Certificates;
 
 class Program
 {
-      
-    
+
+
     static void Main(string[] args)
     {
 
         mathPicker();
 
     }
-    
+
     // public static void addArray()
     // {
     //     Console.Write("Enter the list of numbers you wish to add together: ");
@@ -23,7 +24,7 @@ class Program
     //                         .Split(' ')
     //                         .Select(double.Parse)
     //                         .ToArray();
-        
+
     //     double total = 0;
     //     for (int i = 0; i < inputArray.Length; i++)
     //     {
@@ -31,29 +32,29 @@ class Program
     //     } 
     //     Console.WriteLine($" The sum of the numbers is: {total}");
     // }
-  
+
     // public static void minusArray()
     // {
-        
+
     // }
-  
+
     // public static void timesArray()
     // {
-        
+
     // }
-  
+
     // public static void divideArray()
     // {
-        
+
     // }
 
     public static void mathPicker()
     {
-        Console.WriteLine("Which operation do you wish to do? Pick between +, *, -, / ");
+        Console.WriteLine("Which operation do you wish to do? Pick between +, *, -, / or Area ");
         String op = Console.ReadLine() ?? "";
         Console.Write("Enter the list of numbers: ");
 
-        double []inputArray = Console.ReadLine()
+        double[] inputArray = Console.ReadLine()
                             .Split(' ')
                             .Select(double.Parse)
                             .ToArray();
@@ -62,19 +63,36 @@ class Program
         //double total = (op == "*" || op == "/") ? 1 : 0;
         double total = inputArray[0];
 
-        for (int i = 1; i < inputArray.Length; i++)
+        Geometry geo = new Geometry();
+        if (op == "Area")
         {
-            total = op switch
+         total = geo.GetArea(inputArray[0], inputArray[1]);
+         total = inputArray[0] * inputArray[1];
+         Console.WriteLine($"The area is: {total}");
+        }
+        else
+        {   
+            for (int i = 1; i < inputArray.Length; i++)
             {
-                "/" when inputArray[i] == 0 => total,
-                "+" => total + inputArray[i],
-                "-" => total - inputArray[i],
-                "*" => total * inputArray[i],
-                "/" => total / inputArray[i],
-                _   => total
-            };
-        }     
-        Console.WriteLine($"The result is: {total}");               
+                total = op switch
+                {
+                    "/" when inputArray[i] == 0 => total,
+                    "+" => total + inputArray[i],
+                    "-" => total - inputArray[i],
+                    "*" => total * inputArray[i],
+                    "/" => total / inputArray[i],
+                    _ => total
+                };
+            }
+            Console.WriteLine($"The result is: {total}");   
+        }
+    }
+
+    public class Geometry
+    {
+        public double GetArea(double width, double height)                          => width * height;
+        public double GetArea(double radius)                                        => Math.PI * radius * radius;
+        public double GetArea(double baseLength, double height, bool isTriangle)    => 0.5 * baseLength * height;
     }
 
 
@@ -82,13 +100,13 @@ class Program
     // {
     //     Console.Write("Enter the first number: ");
     //     int n1 = int.Parse(Console.ReadLine());
-        
+
     //     Console.Write("Enter the second number: ");
     //     int n2 = int.Parse(Console.ReadLine());
-        
+
     //     Console.Write("Enter the operator, either +, -, *, /  : ");
     //     string op = Console.ReadLine().Trim().ToLower();
-        
+
     //     return (n1, n2, op);
     // }
     // static void calcResults(int n1, int n2, string op)
@@ -102,15 +120,15 @@ class Program
     //         _   =>"Feil"
     //     };
     //     Console.WriteLine(result);
-        
+
     // }
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
     //    (int num1, int num2, string op) = getNumbers();
     //    string result = op switch
     //    {
@@ -119,9 +137,9 @@ class Program
     //        _    =>"Invalid operation"
     //    };
 
-    
-    
-    
+
+
+
     // static (int, int, string) getNumbers()
     // {
     //     Console.Write("Enter the first number: ");
@@ -132,11 +150,11 @@ class Program
     //     int num2 = int.Parse(Console.ReadLine());
     //     return (num1, num2, op);
     // }
-    
-    
-    
-    
-    
+
+
+
+
+
     // static void addition(int num1, int num2)
     // {
     //    int sum = num1 + num2;
